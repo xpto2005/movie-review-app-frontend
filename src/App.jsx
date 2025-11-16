@@ -4,19 +4,18 @@ import Home from "./pages/Home";
 import AddMovie from "./pages/AddMovie";
 import MovieDetails from "./pages/MovieDetails";
 
-function App() {
+export default function App() {
   return (
     <>
       <Navbar />
-      <div style={{ padding: "20px" }}>
+      <main style={{ padding: "20px" }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/add-movie" element={<AddMovie />} />
           <Route path="/movies/:id" element={<MovieDetails />} />
         </Routes>
-      </div>
+      </main>
     </>
   );
 }
 
-export default App;
