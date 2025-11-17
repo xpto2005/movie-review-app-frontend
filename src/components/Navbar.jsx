@@ -1,24 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
-  return (
-    <nav
-      style={{
-        width: "100%",
-        background: "#222",
-        padding: "14px 30px",
-        display: "flex",
-        alignItems: "center",
-        gap: "25px",
-      }}
-    >
-      <Link to="/" style={{ color: "#fff", fontSize: "18px", textDecoration: "none" }}>
-        Home
-      </Link>
+  const location = useLocation();
 
-      <Link to="/add-movie" style={{ color: "#fff", fontSize: "18px", textDecoration: "none" }}>
-        Add Movie
-      </Link>
+  const linkStyle = (path) => ({
+    color: "#fff",
+    fontSize: "18px",
+    textDecoration: "none",
+    fontWeight: location.pathname === path ? "700" : "500",
+    borderBottom:
+      location.pathname === path ? "2px solid #fff" : "2px solid transparent",
+    paddingBottom: "2px",
+  });
+
+  return (
+    <nav className="navbar">
+      <div className="navbar-inner">
+        <span className="navbar-logo">🎬 Movie Review App</span>
+        <div className="navbar-links">
+          <Link to="/" style={linkStyle("/")}>
+            Home
+          </Link>
+          <Link to="/add-movie" style={linkStyle("/add-movie")}>
+            Add Movie
+          </Link>
+        </div>
+      </div>
     </nav>
   );
 }

@@ -1,42 +1,142 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Layout geral */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f3f4f6;
+  color: #222;
+  line-height: 1.5;
+}
+
+/* Root ocupa a largura toda */
 #root {
-  max-width: 1280px;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  background: #111827;
+  color: #fff;
+  padding: 12px 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.navbar-inner {
+  max-width: 960px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.navbar-logo {
+  font-size: 20px;
+  font-weight: 700;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar-links {
+  display: flex;
+  gap: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Container principal */
+.app-main {
+  max-width: 960px;
+  margin: 24px auto 40px auto;
+  padding: 0 16px;
 }
 
+/* Títulos */
+.page-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #111827;
+}
+
+/* Cards genéricos */
 .card {
-  padding: 2em;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-.read-the-docs {
-  color: #888;
+/* Botões */
+.btn {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: #111827;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #000;
+}
+
+.btn-danger {
+  background: #b91c1c;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #991b1b;
+}
+
+/* Inputs */
+.input,
+.textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5f5;
+  font-size: 15px;
+}
+
+.textarea {
+  min-height: 80px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+/* Secções */
+.section-title {
+  font-size: 22px;
+  margin: 24px 0 12px;
+}
+
+/* Rating em estrelas */
+.stars {
+  color: #fbbf24;
+  margin-left: 4px;
+  font-size: 16px;
+}
+
+/* Mensagens */
+.text-muted {
+  opacity: 0.7;
+  font-size: 14px;
 }
