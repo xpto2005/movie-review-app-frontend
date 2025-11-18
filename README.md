@@ -26,11 +26,17 @@ These features mirror the REST endpoints exposed by the backend, allowing the fr
 ### Tchnologies & Why They’re Used
 
 **React 18**:	Core UI library; enables building a single‑page application with reusable components and reactive state.
+
 **Vite**:	Next‑generation build tool used to scaffold the project, provide fast local development (npm run dev) and optimized production builds.
+
 **React Router DOM**:	Handles client‑side routing. It allows the app to have multiple pages (/, /add-movie, /movies/:id) without full page reloads.
+
 **Fetch API**:	Used for HTTP requests to the backend (GET, POST, DELETE). Keeps the app lightweight and dependency free; could easily be swapped for Axios if desired.
+
 **CSS (custom)**:	Provides basic styling. The app uses simple cards, buttons and form components; no external UI library was required.
+
 **ESLint**:	Ensures code quality and consistent formatting through the project.
+
 
 Each tool was selected to keep the project simple while following modern best practices. React and Vite provide an efficient development experience and produce a minimal production bundle. React Router enables clean URLs and separation of concerns, while the Fetch API avoids additional dependencies. ESLint helps maintain a professional codebase.
 
@@ -148,4 +154,4 @@ Code is linted using ESLint to maintain consistency.
 
 Paulo Filipe Soares Oliveira
 
-Enjoy using the Movie Review App frontend! If you have questions or suggestions, feel free to open an issue or a pull request on the GitHub repository.
+Feel free to reach out for questions or feedback.
