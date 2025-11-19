@@ -88,7 +88,7 @@ export const API_URL = "http://localhost:5000";
 
 
 
-If your backend runs on a different host or port, change this value accordingly.
+
 
 
 
