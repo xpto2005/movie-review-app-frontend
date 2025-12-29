@@ -1,0 +1,203 @@
+// Movie details page - shows movie info, reviews, allows delete and add review
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { API_URL } from "../api/api";
+
+export default function MovieDetails() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  // Movie data and loading state
+  const [movie, setMovie] = useState(null);
+  const [movieLoading, setMovieLoading] = useState(true);
+
+  // Reviews data and loading state
+  const [reviews, setReviews] = useState([]);
+  const [reviewsLoading, setReviewsLoading] = useState(true);
+
+  // Form fields for new review
+  const [author, setAuthor] = useState("");
+  const [rating, setRating] = useState(5);
+  const [comment, setComment] = useState("");
+  const [status, setStatus] = useState(null);
+
+  // Fetch movie by ID
+  useEffect(() => {
+    setMovieLoading(true);
+    fetch(`${API_URL}/movies/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setMovie(data);
+        setMovieLoading(false);
+      })
+      .catch(() => setMovieLoading(false));
+  }, [id]);
+
+  // Load reviews for movie
+  const loadReviews = () => {
+    setReviewsLoading(true);
+    fetch(`${API_URL}/reviews/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setReviews(data);
+        setReviewsLoading(false);
+      })
+      .catch(() => setReviewsLoading(false));
+  };
+
+  useEffect(() => {
+    loadReviews();
+  }, [id]);
+
+  // Delete movie
+  const handleDeleteMovie = () => {
+    if (!window.confirm("Are you sure you want to delete this movie?")) return;
+
+    fetch(`${API_URL}/movies/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then(() => {
+        alert("Movie deleted successfully.");
+        navigate("/"); // Redirect to home page
+      })
+      .catch((err) => console.error(err));
+  };
+
+  // Submit review
+  const handleReviewSubmit = (e) => {
+    e.preventDefault();
+    setStatus(null);
+
+    if (!author || !comment || !rating) {
+      setStatus({ type: "error", message: "All fields are required." });
+      return;
+    }
+
+    fetch(`${API_URL}/reviews/${id}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        author,
+        rating: Number(rating),
+        comment,
+      }),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        setStatus({ type: "success", message: "Review added successfully." });
+        setAuthor("");
+        setRating(5);
+        setComment("");
+        loadReviews(); // Reload updated list
+      })
+      .catch(() =>
+        setStatus({ type: "error", message: "Error adding review." })
+      );
+  };
+
+  // Delete individual review
+  const handleDeleteReview = (reviewId) => {
+    if (!window.confirm("Delete this review?")) return;
+
+    fetch(`${API_URL}/reviews/${reviewId}`, {
+      method: "DELETE",
+    })
+      .then(() => loadReviews())
+      .catch((err) => console.error(err));
+  };
+
+  if (movieLoading) return <p>Loading movie...</p>;
+  if (!movie) return <p>Movie not found.</p>;
+
+  return (
+    <div>
+      <h1 className="page-title">{movie.title}</h1>
+
+      {/* Movie details */}
+      <div className="card" style={{ marginBottom: "20px" }}>
+        <p><strong>Year:</strong> {movie.year}</p>
+        <p><strong>Genre:</strong> {movie.genre}</p>
+
+        <button
+          className="btn btn-danger"
+          style={{ marginTop: "10px" }}
+          onClick={handleDeleteMovie}
+        >
+          Delete Movie
+        </button>
+      </div>
+
+      {/* Reviews list */}
+      <h2>Reviews</h2>
+
+      {reviewsLoading ? (
+        <p>Loading reviews...</p>
+      ) : reviews.length === 0 ? (
+        <p>No reviews yet for this movie.</p>
+      ) : (
+        reviews.map((review) => (
+          <div key={review._id} className="card" style={{ marginBottom: "12px" }}>
+            <p><strong>{review.author}</strong></p>
+            <p>{"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}</p>
+            <p>{review.comment}</p>
+
+            <button
+              className="btn btn-danger"
+              onClick={() => handleDeleteReview(review._id)}
+            >
+              Delete review
+            </button>
+          </div>
+        ))
+      )}
+
+      {/* Add review form */}
+      <h2>Add Review</h2>
+      <form onSubmit={handleReviewSubmit} style={{ maxWidth: "420px" }}>
+        <div className="form-group">
+          <label>Name</label>
+          <input
+            className="input"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            placeholder="Enter your name"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Rating (1–5)</label>
+          <input
+            className="input"
+            type="number"
+            min="1"
+            max="5"
+            value={rating}
+            onChange={(e) => setRating(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Comment</label>
+          <textarea
+            className="textarea"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            placeholder="Write your review"
+          />
+        </div>
+
+        <button type="submit" className="btn btn-primary">
+          Submit Review
+        </button>
+
+        {/* Status message */}
+        {status && (
+          <p style={{ color: status.type === "success" ? "green" : "red" }}>
+            {status.message}
+          </p>
+        )}
+      </form>
+    </div>
+  );
+}

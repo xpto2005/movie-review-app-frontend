@@ -1,0 +1,142 @@
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base styles */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f3f4f6;
+  color: #222;
+  line-height: 1.5;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Navbar styling */
+.navbar {
+  width: 100%;
+  background: #111827;
+  color: #fff;
+  padding: 12px 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.navbar-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+/* Main content wrapper */
+.app-main {
+  max-width: 960px;
+  margin: 24px auto 40px auto;
+  padding: 0 16px;
+}
+
+/* Headings */
+.page-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #111827;
+}
+
+/* Reusable card */
+.card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Button styles */
+.btn {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: #111827;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #000;
+}
+
+.btn-danger {
+  background: #b91c1c;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #991b1b;
+}
+
+/* Input fields */
+.input,
+.textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5f5;
+  font-size: 15px;
+}
+
+.textarea {
+  min-height: 80px;
+}
+
+/* Form layout */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+/* Section headings */
+.section-title {
+  font-size: 22px;
+  margin: 24px 0 12px;
+}
+
+/* Star rating style */
+.stars {
+  color: #fbbf24;
+  margin-left: 4px;
+  font-size: 16px;
+}
+
+/* Light text note */
+.text-muted {
+  opacity: 0.7;
+  font-size: 14px;
+}
