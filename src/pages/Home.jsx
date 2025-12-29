@@ -1,57 +1,67 @@
-// Home page component - lists all movies
 import { useEffect, useState } from "react";
-import { API_URL } from "../api/api.js";
-import { Link } from "react-router-dom";
+import { API_URL } from "../api/api";
+import { Link } from "react-router-dom"; // Import for navigation between routes
 
 export default function Home() {
-  const [movies, setMovies] = useState([]); // store fetched movies
-  const [loading, setLoading] = useState(true); // loading state
+  // Local state for list of movies and error handling
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(false);
 
-  // Fetch movies on component mount
+  // Fetch movies from backend when the component mounts
   useEffect(() => {
-    fetch(`${API_URL}/movies`)
-      .then((res) => res.json())
-      .then((data) => {
-        setMovies(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Erro:", err);
-        setLoading(false);
-      });
+    const fetchMovies = async () => {
+      try {
+        const res = await fetch(`${API_URL}/movies`);
+        if (!res.ok) throw new Error("Failed to fetch movies");
+        const data = await res.json();
+        setMovies(data); // Store movies in state
+      } catch (err) {
+        console.error("Error fetching movies:", err);
+        setError(true); // Trigger error message
+      }
+    };
+
+    fetchMovies();
   }, []);
 
   return (
-    <div>
-      <h1 className="page-title">Movies</h1>
+    <div style={{ maxWidth: "800px", margin: "40px auto" }}>
+      <h1>Movie List</h1>
 
-      {loading ? (
-        <p className="text-muted">Loading movies...</p>
-      ) : movies.length === 0 ? (
-        <p className="text-muted">No movies available.</p>
-      ) : (
-        <ul style={{ listStyle: "none", padding: 0 }}>
-          {movies.map((movie) => (
-            <li key={movie._id} className="card">
-              {/* Link to individual movie page */}
-              <Link
-                to={`/movies/${movie._id}`}
-                style={{
-                  textDecoration: "none",
-                  fontSize: "18px",
-                  color: "#111827",
-                  fontWeight: 600,
-                }}
-              >
-                {movie.title} ({movie.year})
-              </Link>
-              <p style={{ marginTop: 4, color: "#4b5563" }}>
-                Genre: {movie.genre || "N/A"}
-              </p>
-            </li>
-          ))}
-        </ul>
+      {/* Show error message if fetch failed */}
+      {error && (
+        <p style={{ color: "red" }}>Error loading movies.</p>
       )}
+
+      {/* Show placeholder if no movies are returned */}
+      {!error && movies.length === 0 && <p>No movies found.</p>}
+
+      {/* Render movie cards */}
+      {!error &&
+        movies.map((movie) => (
+          <div
+            key={movie._id}
+            className="card"
+            style={{ marginBottom: "12px" }}
+          >
+            {/* Movie title as clickable link to movie details page */}
+            <Link
+              to={`/movies/${movie._id}`}
+              style={{
+                textDecoration: "none",
+                fontSize: "18px",
+                color: "#111827",
+                fontWeight: 600,
+              }}
+            >
+              {movie.title} ({movie.year})
+            </Link>
+            {/* Display genre information */}
+            <p style={{ marginTop: 4, color: "#4b5563" }}>
+              Genre: {movie.genre || "N/A"}
+            </p>
+          </div>
+        ))}
     </div>
   );
 }

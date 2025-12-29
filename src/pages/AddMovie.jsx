@@ -25,7 +25,8 @@ export default function AddMovie() {
     };
 
     try {
-      const response = await fetch(`${API_URL}/movies`, {
+      // Fixed URL: removed duplicate slash
+      const response = await fetch(`${API_URL}movies`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newMovie),
