@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+
+/* Basic full-height layout */
+>>>>>>> 677ba97 (docs: improve README with fixes, backend link and deployment notes)
 html,
 body,
 #root {
@@ -6,7 +11,11 @@ body,
   height: 100%;
 }
 
+<<<<<<< HEAD
 /* Suavizar texto */
+=======
+/* Improve font rendering on different platforms */
+>>>>>>> 677ba97 (docs: improve README with fixes, backend link and deployment notes)
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

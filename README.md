@@ -23,7 +23,11 @@ These features mirror the REST endpoints exposed by the backend, allowing the fr
 
 
 
+<<<<<<< HEAD
 ### Tchnologies & Why They’re Used
+=======
+### Technologies & Why They’re Used
+>>>>>>> 677ba97 (docs: improve README with fixes, backend link and deployment notes)
 
 **React 18**:	Core UI library; enables building a single‑page application with reusable components and reactive state.
 
@@ -138,7 +142,11 @@ These endpoints must be available on the backend for the frontend to function. B
 
 
 
+<<<<<<< HEAD
 ###cRequirements & Best Practices
+=======
+###Requirements & Best Practices
+>>>>>>> 677ba97 (docs: improve README with fixes, backend link and deployment notes)
 
 The app uses modern React features such as hooks (useState, useEffect) for state management and side effects. Each page encapsulates its own logic.
 

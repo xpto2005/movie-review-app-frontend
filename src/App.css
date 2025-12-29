@@ -60,7 +60,7 @@ body {
   color: #111827;
 }
 
-/* Cards genéricos */
+/* Reusable card */
 .card {
   background: #ffffff;
   border-radius: 8px;
